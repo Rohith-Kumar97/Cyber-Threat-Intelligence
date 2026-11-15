@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scan Report Details</title>
+    <style>
+        body {
+            background: #101827;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 25px;
+        }
+        h1 { color: #38bdf8; }
+        .box {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 12px;
+            max-width: 700px;
+        }
+        a { color: #38bdf8; }
+    </style>
+</head>
+<body>
+
+<h1>Cyber Security Scan Report</h1>
+
+<div class="box">
+
+    <p><b>Scan ID:</b> {{ scan[0] }}</p>
+    <p><b>Scan Type:</b> {{ scan[2] }}</p>
+    <p><b>Input:</b> {{ scan[3] }}</p>
+    <p><b>Status:</b> {{ scan[4] }}</p>
+    <p><b>Risk Score:</b> {{ scan[5] }}/100</p>
+    <p><b>Risk Level:</b> {{ scan[6] }}</p>
+    <p><b>Date:</b> {{ scan[8] }}</p>
+
+    <h3>Detected Indicators</h3>
+
+    {% for item in indicators %}
+        <p>⚠️ {{ item }}</p>
+    {% else %}
+        <p>No suspicious indicators detected.</p>
+    {% endfor %}
+
+</div>
+
+<br>
+
+<a href="/dashboard">Dashboard</a> |
+<a href="/history">Scan History</a> |
+<a href="/">Home</a>
+
+</body>
+</html>

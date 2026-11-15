@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signup - Cyber Threat Intelligence</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+    font-family:Arial,sans-serif;
+    background:#071426;
+    color:white;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+.box{
+    width:100%;
+    max-width:420px;
+    padding:30px;
+    background:linear-gradient(135deg,#123b70,#07518b);
+    border:1px solid #168bce;
+    border-radius:15px;
+}
+h1{text-align:center;color:#42e8ff;margin-bottom:10px}
+p{text-align:center;color:#dceeff;margin-bottom:25px}
+input{
+    width:100%;
+    padding:14px;
+    margin:10px 0;
+    background:#101820;
+    border:1px solid #168bce;
+    border-radius:8px;
+    color:white;
+    font-size:15px;
+}
+button{
+    width:100%;
+    padding:14px;
+    margin-top:15px;
+    background:#12cde5;
+    color:#06213a;
+    border:0;
+    border-radius:8px;
+    font-weight:bold;
+    font-size:16px;
+    cursor:pointer;
+}
+a{color:#42e8ff;text-decoration:none}
+.footer{text-align:center;margin-top:20px;color:white}
+.message{color:#ffd166;text-align:center;margin:12px 0}
+</style>
+</head>
+<body>
+<div class="box">
+    <h1>🛡️ Create Account</h1>
+    <p>AI Cyber Threat Intelligence</p>
+
+    <form action="/signup" method="POST">
+        <input type="text" name="username"
+               placeholder="Enter Username" required>
+
+        <input type="email" name="email"
+               placeholder="Enter Email" required>
+
+        <input type="password" name="password"
+               placeholder="Create Password" minlength="8" required>
+
+        <button type="submit">Create Account</button>
+    </form>
+
+    {% if message %}
+    <div class="message">{{ message }}</div>
+    {% endif %}
+
+    <div class="footer">
+        Already have an account?
+        <a href="/login">Login</a>
+    </div>
+</div>
+</body>
+</html>

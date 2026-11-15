@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cyber Security Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #101827;
+            color: white;
+            padding: 25px;
+        }
+        h1 { color: #38bdf8; }
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        .card {
+            background: #1e293b;
+            padding: 22px;
+            border-radius: 12px;
+        }
+        .number {
+            font-size: 30px;
+            font-weight: bold;
+        }
+        a { color: #38bdf8; text-decoration: none; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #1e293b;
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #475569;
+            text-align: left;
+        }
+        .nav { margin: 20px 0; }
+        .nav a { margin-right: 20px; }
+    </style>
+</head>
+<body>
+
+<h1>Cyber Threat Intelligence Dashboard</h1>
+
+<p>Welcome, {{ session.username }}!</p>
+
+<div class="nav">
+    <a href="/">Home / Scanner</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/history">Scan History</a>
+    <a href="/logout">Logout</a>
+</div>
+
+<div class="cards">
+
+    <div class="card">
+        <h3>Total Scans</h3>
+        <div class="number">{{ stats[0] or 0 }}</div>
+    </div>
+
+    <div class="card">
+        <h3>Low Risk</h3>
+        <div class="number">{{ stats[1] or 0 }}</div>
+    </div>
+
+    <div class="card">
+        <h3>Medium Risk</h3>
+        <div class="number">{{ stats[2] or 0 }}</div>
+    </div>
+
+    <div class="card">
+        <h3>High Risk</h3>
+        <div class="number">{{ stats[3] or 0 }}</div>
+    </div>
+
+</div>
+
+<h2>Recent Scans</h2>
+
+<table>
+    <tr>
+        <th>Type</th>
+        <th>Input</th>
+        <th>Risk Score</th>
+        <th>Risk Level</th>
+        <th>Date</th>
+        <th>Report</th>
+    </tr>
+
+    {% for scan in recent_scans %}
+    <tr>
+        <td>{{ scan[1] }}</td>
+        <td>{{ scan[2][:40] }}</td>
+        <td>{{ scan[4] }}/100</td>
+        <td>{{ scan[5] }}</td>
+        <td>{{ scan[6] }}</td>
+        <td><a href="{{ url_for('view_scan', scan_id=scan[0]) }}">View</a></td>
+    </tr>
+    {% else %}
+    <tr>
+        <td colspan="6">No scans available yet.</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scan History</title>
+    <style>
+        body {
+            background: #101827;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 25px;
+        }
+        h1 { color: #38bdf8; }
+        a { color: #38bdf8; text-decoration: none; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #1e293b;
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #475569;
+            text-align: left;
+        }
+        .nav a { margin-right: 20px; }
+    </style>
+</head>
+<body>
+
+<h1>Previous Scan History</h1>
+
+<div class="nav">
+    <a href="/">Home</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/history">History</a>
+    <a href="/logout">Logout</a>
+</div>
+
+<br>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Scan Type</th>
+        <th>Scanned Input</th>
+        <th>Status</th>
+        <th>Score</th>
+        <th>Risk Level</th>
+        <th>Date</th>
+        <th>Details</th>
+    </tr>
+
+    {% for scan in scans %}
+    <tr>
+        <td>{{ scan[0] }}</td>
+        <td>{{ scan[1] }}</td>
+        <td>{{ scan[2][:35] }}</td>
+        <td>{{ scan[3] }}</td>
+        <td>{{ scan[4] }}/100</td>
+        <td>{{ scan[5] }}</td>
+        <td>{{ scan[6] }}</td>
+        <td>
+            <a href="{{ url_for('view_scan', scan_id=scan[0]) }}">
+                View Report
+            </a>
+        </td>
+    </tr>
+    {% else %}
+    <tr>
+        <td colspan="8">No scan history found.</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+</body>
+</html>
